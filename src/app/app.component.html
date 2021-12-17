@@ -1,0 +1,757 @@
+<mat-grid-list cols="14" rowHeight="100%">
+  <mat-grid-tile [colspan]="1" [style.background]="'#E8E8E8'">
+    <div
+      style="
+        width: 100%;
+        height: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+        display: flex;
+        flex-direction: column;
+      "
+    >
+      <div
+        style="
+          align-items: flex-start;
+          justify-content: center;
+          display: flex;
+          flex: 1;
+          padding-top: 30px;
+        "
+      >
+        <img src="assets/6.svg" />
+      </div>
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          align-items: center;
+          padding-bottom: 30px;
+        "
+      >
+        <div style="margin-bottom: 20px;">
+          <img src="assets/Group.svg" />
+        </div>
+        <div style="margin-bottom: 20px;">
+          <img src="assets/Vector.svg" />
+        </div>
+        <div style="display: flex; align-items: flex-end;">
+          <img src="assets/Jas Arora 1.png" />
+          <img style="margin-left: -10px;" src="assets/Ellipse 3.svg" />
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="3" [style.background]="'#F1F1F1'">
+    <div
+      style="
+        width: 100%;
+        height: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+        display: flex;
+        flex-direction: column;
+      "
+    >
+      <div
+        style="
+          align-items: flex-start;
+          padding-left: 20px;
+          padding-right: 20px;
+          display: flex;
+          flex: 1;
+          padding-top: 30px;
+          flex-direction: column;
+          height: 70%;
+        "
+      >
+        <h2 style="font-weight: 700;">Prospector</h2>
+        <!-- <div
+          style="
+            border: 1px solid #cccccc;
+            background-color: white;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            width: calc(100% - 20px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+          "
+        >
+          <p
+            style="
+              color: #3c3c3c80;
+              font-size: 13px;
+              font-weight: 700;
+              line-height: 12px;
+              margin: 0;
+            "
+          >
+            Search for a table or a segment
+          </p>
+        </div> -->
+
+        <input
+          type="text"
+          placeholder="Search for a table or segment"
+          (keyup)="filter($event)"
+        />
+        <p
+          style="
+            font-weight: 700;
+            margin-top: 30px;
+            size: 14px;
+            line-height: 12px;
+            color: #3c3c3cb2;
+          "
+        >
+          SEGMENTS
+        </p>
+        <div
+          style="
+            padding-top: 20px;
+            padding-bottom: 20px;
+            width: calc(100% - 20px);
+            overflow-y: scroll;
+          "
+        >
+          <div *ngIf="filteredSegments.length>0">
+            <div
+              style="margin-bottom: 10px; display: flex; align-items: center;"
+              *ngFor="let segment of filteredSegments; let i = index;"
+            >
+              <div style="margin-right: 10px;">
+                <ngx-emoji
+                  emoji="{{segment?.emoji?.name}}"
+                  set="apple"
+                ></ngx-emoji>
+              </div>
+              <p
+                style="
+                  color: #181818;
+                  font-size: 14px;
+                  font-weight: 700;
+                  line-height: 12px;
+                  margin: 0;
+                "
+              >
+                {{segment.text}}
+              </p>
+            </div>
+          </div>
+
+          <div *ngIf="filteredSegments.length==0">
+            <div
+              style="margin-bottom: 10px; display: flex; align-items: center;"
+              *ngFor="let segment of segments; let i = index;"
+            >
+              <div style="margin-right: 10px;">
+                <ngx-emoji
+                  emoji="{{segment?.emoji?.name}}"
+                  set="apple"
+                ></ngx-emoji>
+              </div>
+              <p
+                style="
+                  color: #181818;
+                  font-size: 14px;
+                  font-weight: 700;
+                  line-height: 12px;
+                  margin: 0;
+                "
+              >
+                {{segment.text}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          align-items: center;
+          padding-bottom: 30px;
+          padding-left: 10px;
+          padding-right: 10px;
+        "
+      >
+        <div
+          style="
+            background-color: #334bfa;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 10px;
+            padding-right: 10px;
+            width: calc(100% - 20px);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            border-radius: 5px;
+            cursor: pointer;
+          "
+          (click)="openModalSegment()"
+        >
+          <img style="margin-right: 5px;" src="assets/Plus.svg" />
+          <p
+            style="
+              color: #ffffff;
+              font-size: 16px;
+              font-weight: 700;
+              line-height: 12px;
+              margin: 0;
+            "
+          >
+            Add a segment
+          </p>
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="10" [style.background]="'#FFFFFF'">
+    <div
+      style="width: 100%; height: 100%; display: flex; flex-direction: column;"
+    >
+      <div
+        style="display: flex; justify-content: flex-end; align-items: center;"
+      >
+        <div
+          style="display: flex; justify-content: flex-end; align-items: center;"
+        >
+          <img style="margin-right: 7px;" src="assets/Document.svg" />
+          <img style="margin-right: 5px;" src="assets/ArrowDown.svg" />
+        </div>
+        <img style="margin-right: 5px;" src="assets/image 3.png" height="70" />
+      </div>
+      <div
+        style="
+          margin-left: 50px;
+          margin-right: 50px;
+          border-bottom: 1px solid #cccccc;
+        "
+      ></div>
+      <div
+        style="
+          padding-left: 50px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          width: calc(100% - 20px);
+          overflow-y: scroll;
+        "
+      >
+        <!-- <div>
+          <div style="margin-top: 30px; display: flex; align-items: center;">
+            <img
+              style="margin-right: 17px; height: 20px;"
+              src="assets/Ellipse 3.svg"
+            />
+
+            <p
+              style="
+                color: #3c3c3c;
+                font-size: 30px;
+                font-weight: 700;
+                line-height: 12px;
+                margin: 0;
+                margin-right: 17px;
+              "
+            >
+              Segment 1
+            </p>
+            <img
+              style="margin-right: 5px;"
+              height="17"
+              src="assets/ArrowDown.svg"
+            />
+          </div>
+          <div
+            style="
+              margin-top: 30px;
+              display: flex;
+              align-items: center;
+              margin-left: 37px;
+            "
+          >
+            <div
+              style="
+                width: 80px;
+                height: 80px;
+                background: lightblue;
+                border-radius: 10px;
+                border: 2px solid #3c3c3c;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <img height="17" src="assets/PlusBlack.svg" />
+            </div>
+          </div>
+        </div> -->
+
+        <div *ngIf="filteredSegments.length>0">
+          <div
+            style="margin-top: 50px;"
+            *ngFor="let segment of filteredSegments; let i = index;"
+          >
+            <div style="margin-top: 30px; display: flex; align-items: center;">
+              <div style="margin-right: 17px; height: 20px;">
+                <ngx-emoji
+                  emoji="{{segment?.emoji?.name}}"
+                  set="apple"
+                ></ngx-emoji>
+              </div>
+
+              <p
+                style="
+                  color: #3c3c3c;
+                  font-size: 30px;
+                  font-weight: 700;
+                  line-height: 12px;
+                  margin: 0;
+                  margin-right: 17px;
+                "
+              >
+                {{segment.text}}
+              </p>
+              <img
+                style="margin-right: 5px;"
+                height="17"
+                src="assets/ArrowDown.svg"
+              />
+            </div>
+            <div
+              style="
+                margin-top: 30px;
+                display: flex;
+                margin-left: 37px;
+                overflow-x: scroll;
+              "
+            >
+              <div *ngFor="let child of segment?.childs;">
+                <div
+                  [style.border-color]="child.color"
+                  style="
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 10px;
+                    border: 2px solid;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    margin-right: 50px;
+                  "
+                >
+                  <div>
+                    <ngx-emoji
+                      emoji="{{child?.emoji?.name}}"
+                      set="apple"
+                    ></ngx-emoji>
+                  </div>
+                  <div
+                    style="
+                      position: absolute;
+                      right: 0;
+                      top: 0;
+                      margin-right: 7px;
+                      margin-top: 7px;
+                    "
+                  >
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 10 10"
+                      [attr.fill]="child.color"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="5" cy="5" r="5" [attr.fill]="child.color" />
+                    </svg>
+                  </div>
+                </div>
+                <div style="width: 80px;">
+                  <p
+                    style="
+                      color: #3c3c3c;
+                      font-size: 14px;
+                      font-weight: 600;
+                      line-height: 14px;
+                      margin: 0;
+                      margin-top: 10px;
+                    "
+                  >
+                    {{child.desc}}
+                  </p>
+                </div>
+              </div>
+              <div (click)="openModalTable(segment)" style="cursor: pointer;">
+                <div
+                  style="
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 10px;
+                    border: 2px solid black;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    margin-right: 50px;
+                  "
+                >
+                  <img height="17" src="assets/PlusBlack.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="filteredSegments.length==0">
+          <div
+            style="margin-top: 50px;"
+            *ngFor="let segment of segments; let i = index;"
+          >
+            <div style="margin-top: 30px; display: flex; align-items: center;">
+              <div style="margin-right: 17px; height: 20px;">
+                <ngx-emoji
+                  emoji="{{segment?.emoji?.name}}"
+                  set="apple"
+                ></ngx-emoji>
+              </div>
+
+              <p
+                style="
+                  color: #3c3c3c;
+                  font-size: 30px;
+                  font-weight: 700;
+                  line-height: 12px;
+                  margin: 0;
+                  margin-right: 17px;
+                "
+              >
+                {{segment.text}}
+              </p>
+              <img
+                style="margin-right: 5px;"
+                height="17"
+                src="assets/ArrowDown.svg"
+              />
+            </div>
+            <div
+              style="
+                margin-top: 30px;
+                display: flex;
+                margin-left: 37px;
+                overflow-x: scroll;
+              "
+            >
+              <div *ngFor="let child of segment?.childs;">
+                <div
+                  [style.border-color]="child.color"
+                  style="
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 10px;
+                    border: 2px solid;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    margin-right: 50px;
+                  "
+                >
+                  <div>
+                    <ngx-emoji
+                      emoji="{{child?.emoji?.name}}"
+                      set="apple"
+                    ></ngx-emoji>
+                  </div>
+                  <div
+                    style="
+                      position: absolute;
+                      right: 0;
+                      top: 0;
+                      margin-right: 7px;
+                      margin-top: 7px;
+                    "
+                  >
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 10 10"
+                      [attr.fill]="child.color"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="5" cy="5" r="5" [attr.fill]="child.color" />
+                    </svg>
+                  </div>
+                </div>
+                <div style="width: 80px;">
+                  <p
+                    style="
+                      color: #3c3c3c;
+                      font-size: 14px;
+                      font-weight: 600;
+                      line-height: 14px;
+                      margin: 0;
+                      margin-top: 10px;
+                    "
+                  >
+                    {{child.desc}}
+                  </p>
+                </div>
+              </div>
+              <div (click)="openModalTable(segment)" style="cursor: pointer;">
+                <div
+                  style="
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 10px;
+                    border: 2px solid black;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    margin-right: 50px;
+                  "
+                >
+                  <img height="17" src="assets/PlusBlack.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+<div class="modal" [style.display]="showModalTable?'block':'none'">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="closeBtn" (click)="closeModalTable()">&times;</span>
+      <h2 style="color: black;">Add a Segment</h2>
+    </div>
+    <div class="modal-body">
+      <div>
+        <div style="margin-bottom: 30px;">
+          <h3 style="margin: 0;">Name</h3>
+          <input
+            type="text"
+            (keyup)="changeTableName($event)"
+            [style.border-color]="errorTableName?'red':''"
+          />
+        </div>
+
+        <div style="margin-bottom: 30px;">
+          <h3 style="margin: 0;">Icon</h3>
+          <div
+            class="input-icon"
+            style="display: flex; cursor: pointer;"
+            (click)="openEmojiMartTable()"
+          >
+            <ngx-emoji emoji="{{tableIcon}}" set="apple"></ngx-emoji>
+            <div
+              style="
+                display: flex;
+                flex-grow: 1;
+                justify-content: flex-end;
+                align-items: center;
+              "
+            >
+              <img style="margin-right: 5px;" src="assets/ArrowDown.svg" />
+            </div>
+          </div>
+          <div *ngIf="isOpenEmojiMartTable">
+            <emoji-mart
+              (emojiClick)="changeEmojiTable($event)"
+              [style]="{ width:'100%' }"
+            ></emoji-mart>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+          <h3 style="margin: 0;">Color</h3>
+          <div
+            class="input-icon"
+            style="display: flex; cursor: pointer;"
+            (click)="openColorPicker()"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 10 10"
+              [attr.fill]="tableIconColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="5" cy="5" r="5" [attr.fill]="tableIconColor" />
+            </svg>
+            <div
+              style="
+                display: flex;
+                flex-grow: 1;
+                justify-content: flex-end;
+                align-items: center;
+              "
+            >
+              <img style="margin-right: 5px;" src="assets/ArrowDown.svg" />
+            </div>
+          </div>
+          <div
+            *ngIf="isOpenColorPickerTable"
+            style="
+              width: 100%;
+              background-color: white;
+              border: 2px solid black;
+            "
+          >
+            <div
+              style="
+                margin: 5px;
+                flex: 1;
+                display: inline-block;
+                cursor: pointer;
+              "
+              (click)="changeColor(color)"
+              *ngFor="let color of colorPalette"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 10 10"
+                [attr.fill]="color"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="5" cy="5" r="5" [attr.fill]="color" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" style="display: flex;">
+      <div
+        style="
+          background-color: #334bfa;
+          padding-right: 30px;
+          padding-left: 30px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          border-radius: 10px;
+          margin-right: 15px;
+          cursor: pointer;
+        "
+        (click)="addTable()"
+      >
+        <h5 style="font-weight: 700; margin-bottom: 0px;">Add</h5>
+      </div>
+      <div
+        style="
+          background-color: #ffffff;
+          border: 2px solid #334bfa;
+          padding-right: 30px;
+          padding-left: 30px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          border-radius: 10px;
+          margin-right: 15px;
+          cursor: pointer;
+        "
+        (click)="closeModalTable()"
+      >
+        <h5 style="font-weight: 700; margin-bottom: 0px; color: #334bfa;">
+          Cancel
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" [style.display]="showModalSegment?'block':'none'">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="closeBtn" (click)="closeModalSegment()">&times;</span>
+      <h2 style="color: black;">Add a Segment</h2>
+    </div>
+    <div class="modal-body">
+      <div>
+        <div style="margin-bottom: 30px;">
+          <h3 style="margin: 0;">Name</h3>
+          <input
+            type="text"
+            (keyup)="changeSegmentName($event)"
+            [style.border-color]="errorSegmentName?'red':''"
+          />
+        </div>
+
+        <div style="margin-bottom: 30px;">
+          <h3 style="margin: 0;">Icon</h3>
+          <div
+            class="input-icon"
+            style="display: flex; cursor: pointer;"
+            (click)="openEmojiMartSegment()"
+          >
+            <ngx-emoji emoji="{{segmentIcon}}" set="apple"></ngx-emoji>
+            <div
+              style="
+                display: flex;
+                flex-grow: 1;
+                justify-content: flex-end;
+                align-items: center;
+              "
+            >
+              <img style="margin-right: 5px;" src="assets/ArrowDown.svg" />
+            </div>
+          </div>
+          <div *ngIf="isOpenEmojiMartSegment">
+            <emoji-mart
+              (emojiClick)="changeEmojiSegment($event)"
+              [style]="{ width:'100%' }"
+            ></emoji-mart>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+          <h3 style="margin: 0;">Description</h3>
+          <textarea (keyup)="changeSegmentDescription($event)"> </textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" style="display: flex;">
+      <div
+        style="
+          background-color: #334bfa;
+          padding-right: 30px;
+          padding-left: 30px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          border-radius: 10px;
+          margin-right: 15px;
+          cursor: pointer;
+        "
+        (click)="addSegment()"
+      >
+        <h5 style="font-weight: 700; margin-bottom: 0px;">Add</h5>
+      </div>
+      <div
+        style="
+          background-color: #ffffff;
+          border: 2px solid #334bfa;
+          padding-right: 30px;
+          padding-left: 30px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          border-radius: 10px;
+          margin-right: 15px;
+          cursor: pointer;
+        "
+        (click)="closeModalSegment()"
+      >
+        <h5 style="font-weight: 700; margin-bottom: 0px; color: #334bfa;">
+          Cancel
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
